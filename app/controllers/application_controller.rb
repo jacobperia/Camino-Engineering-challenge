@@ -11,4 +11,14 @@ class ApplicationController < ActionController::API
     # In production, you would validate against a database or external service
     render json: { errors: ['Unauthorized'] }, status: :unauthorized unless api_key.present?
   end
+
+  def authorize_payment_access!(payment)
+    render json: { errors: ['Forbidden'] }, status: :forbidden unless payment_accessible?(payment)
+  end
+
+  def payment_accessible?(_payment)
+    # Authorization logic goes here.
+
+    true
+  end
 end
