@@ -8,7 +8,7 @@ class ItalcalcMockClientService
   def create_payment(params)
     {
       id: SecureRandom.hex(10),
-      name: params[:customer_name],
+      name: params[:name],
       amount_in_cents: params[:amount_in_cents],
       last_four: params[:card_number][-4..],
       status: 'success'

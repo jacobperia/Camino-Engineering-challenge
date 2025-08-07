@@ -24,9 +24,9 @@ module Api
         render json: {
           id: payment.id,
           amount_in_cents: payment.amount_in_cents,
-          last_four: payment.card_last_four.to_s,
-          name: payment.customer_name,
-          status: payment.payment_status.capitalize
+          last_four: payment.last_four.to_s,
+          name: payment.name,
+          status: payment.status.capitalize
         }
       rescue ActiveRecord::RecordNotFound
         render json: { errors: ['Payment not found'] }, status: :not_found
@@ -38,10 +38,10 @@ module Api
 
         payment = Payment.create!(
           iticalc_id: result[:id],
-          customer_name: result[:name],
+          name: result[:name],
           amount_in_cents: result[:amount_in_cents],
-          card_last_four: result[:last_four],
-          payment_status: result[:status]
+          last_four: result[:last_four],
+          status: result[:status]
         )
 
         render json: payment, status: :created
@@ -51,13 +51,13 @@ module Api
         payment = Payment.find(params[:id])
         authorize_payment_access!(payment)
 
-        if payment.update(payment_status: params[:status])
+        if payment.update(status: params[:status])
           render json: {
             id: payment.id,
             amount_in_cents: payment.amount_in_cents,
-            last_four: payment.card_last_four.to_s,
-            name: payment.customer_name,
-            status: payment.payment_status.capitalize
+            last_four: payment.last_four.to_s,
+            name: payment.name,
+            status: payment.status.capitalize
           }
         else
           render json: { errors: payment.errors.full_messages }, status: :unprocessable_entity
@@ -69,7 +69,7 @@ module Api
       private
 
       def payment_params
-        params.permit(:customer_name, :card_number, :card_expiration, :address, :amount_in_cents)
+        params.permit(:name, :card_number, :card_expiration, :address, :amount_in_cents)
       end
     end
   end

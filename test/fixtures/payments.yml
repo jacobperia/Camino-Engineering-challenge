@@ -2,14 +2,14 @@
 
 one:
   iticalc_id: "test_id_1"
-  customer_name: "John Doe"
+  name: "John Doe"
   amount_in_cents: 5000
-  card_last_four: "1111"
-  payment_status: "success"
+  last_four: "1111"
+  status: "success"
 
 two:
   iticalc_id: "test_id_2"
-  customer_name: "Jane Smith"
+  name: "Jane Smith"
   amount_in_cents: 7500
-  card_last_four: "2222"
-  payment_status: "success"
+  last_four: "2222"
+  status: "success"
