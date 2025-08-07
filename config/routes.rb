@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :payments, only: %i[index create show update]
       get 'reports/monthly', to: 'reports#monthly'
+      get 'reports/charge_token', to: 'reports#charge_token'
     end
   end
 end
