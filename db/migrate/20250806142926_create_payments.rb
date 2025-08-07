@@ -3,7 +3,7 @@ class CreatePayments < ActiveRecord::Migration[7.1]
     create_table :payments do |t|
       t.string :iticalc_id
       t.string :name
-      t.integer :amount_in_cents
+      t.string :amount_in_cents
       t.integer :last_four
       t.string :status
 
